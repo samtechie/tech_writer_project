@@ -34,19 +34,24 @@ Setting up a Redis Standalone server is covered in detail [here](https://fly.io/
 
 Below are the steps you would take to run multi-region Redis
 
-Create a volume in your primary region
+Create a volume in your primary region:
 
 ```
 fly volumes create redis_server --size 10 --region scl
 ```
 
-Add volumes in other regions
+Add volumes in other regions:
 
 ```
 fly volumes create redis_server --size 10 --region ord
 
 fly volumes create redis_server --size 10 --region atl
+```
 
+Add resource instances i.e increase the VMs the app is running on:
+
+```
+fly scale count 2
 ```
 
 You should run your application in the same region as your primary Redis instance and connect to the other instances using region specific addresses.
